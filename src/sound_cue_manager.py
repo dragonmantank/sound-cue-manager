@@ -31,7 +31,10 @@ class SoundCueManager:
     def build_cue_list(self):
         self.cue_list_pane.lb.delete(0, tk.END)
         for id, x in enumerate(self.files):
-            self.cue_list_pane.lb.insert(id, x["Title"])
+            title = x["Title"]
+            if x["loop"]:
+                title = "(L)" + title
+            self.cue_list_pane.lb.insert(id, title)
         self.cue_list_pane.lb.activate(0)
         self.cue_list_pane.lb.selection_set(0)
 
@@ -43,3 +46,4 @@ class SoundCueManager:
             cue = self.files[selection[0]]
             self.edit_pane.cue_name_entry.insert(0, cue["Title"])
             self.edit_pane.path_entry.insert(0, cue["path"])
+            self.edit_pane.loop_var.set(cue["loop"])

@@ -21,8 +21,10 @@ class ControlsPane:
     def play(self):
         selection = self.app.cue_list_pane.lb.curselection()
         if selection:
-            pygame.mixer.music.load(self.app.files[selection[0]]["path"])
-            pygame.mixer.music.play()
+            file_info = self.app.files[selection[0]]
+            pygame.mixer.music.load(file_info["path"])
+            loop = (file_info['loop'] or 0) * 99
+            pygame.mixer.music.play(loops=loop)
             self.nextCue()
 
     def stop(self):
@@ -58,5 +60,11 @@ class ControlsPane:
 
     def add_cue(self):
         f = askopenfilename(filetypes=[("All Files", "*.*"), ("MP3 File", "*.mp3"), ("WAV File", "*.wav")])
-        self.app.files.append({"Title": os.path.basename(f), "path": f})
+        self.app.files.append(
+            {
+                "Title": os.path.basename(f), 
+                "path": f,
+                "loop": 0
+            }
+        )
         self.app.build_cue_list()
