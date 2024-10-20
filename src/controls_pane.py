@@ -1,22 +1,25 @@
 import tkinter as tk
+from tkinter import font as tkFont
 import pygame
 from tkinter.filedialog import asksaveasfile, askopenfile, askopenfilename
 import json
 import os
 
+
 class ControlsPane:
     def __init__(self, app, parent):
         self.app = app
+        helv36 = tkFont.Font(family='Helvetica', size=24, weight='bold')
 
         self.pane = tk.PanedWindow(parent)
-        tk.Button(self.pane, text="Play", command=self.play).grid(column=0, row=0)
-        tk.Button(self.pane, text="Stop", command=self.stop).grid(column=1, row=0)
-        tk.Button(self.pane, text="Previous", command=self.prevCue).grid(column=0, row=1)
-        tk.Button(self.pane, text="Next", command=self.nextCue).grid(column=1, row=1)
-        tk.Button(self.pane, text="Quit", command=app.root.destroy).grid(column=0, row=3)
-        tk.Button(self.pane, text="Save", command=lambda:self.save_file()).grid(column=0, row=4)
-        tk.Button(self.pane, text="Load", command=lambda:self.open_file()).grid(column=0, row=5)
-        tk.Button(self.pane, text="Add Cue", command=lambda:self.add_cue()).grid(column=0, row=6)
+        tk.Button(self.pane, font=helv36, text="Play", command=self.play).grid(column=0, row=0)
+        tk.Button(self.pane, font=helv36, text="Stop", command=self.stop).grid(column=1, row=0)
+        tk.Button(self.pane, font=helv36, text="Previous", command=self.prevCue).grid(column=0, row=1)
+        tk.Button(self.pane, font=helv36, text="Next", command=self.nextCue).grid(column=1, row=1)
+        tk.Button(self.pane, font=helv36, text="Quit", command=app.root.destroy).grid(column=0, row=3)
+        tk.Button(self.pane, font=helv36, text="Save", command=lambda:self.save_file()).grid(column=0, row=4)
+        tk.Button(self.pane, font=helv36, text="Load", command=lambda:self.open_file()).grid(column=0, row=5)
+        tk.Button(self.pane, font=helv36, text="Add Cue", command=lambda:self.add_cue()).grid(column=0, row=6)
 
     def play(self):
         selection = self.app.cue_list_pane.lb.curselection()

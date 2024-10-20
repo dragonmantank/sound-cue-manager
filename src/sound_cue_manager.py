@@ -32,7 +32,8 @@ class SoundCueManager:
         self.cue_list_pane.lb.delete(0, tk.END)
         for id, x in enumerate(self.files):
             title = x["Title"]
-            if x["loop"]:
+            loop = (x["loop"] or False)
+            if loop:
                 title = "(L)" + title
             self.cue_list_pane.lb.insert(id, title)
         self.cue_list_pane.lb.activate(0)
